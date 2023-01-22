@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+import random
 # Create your models here.
 
 
@@ -53,3 +54,19 @@ class Notice(models.Model):
     date=models.DateField(auto_now=True)
     by=models.CharField(max_length=20,null=True,default='school')
     message=models.CharField(max_length=500)
+
+def random_string():
+    return str(random.randint(10000, 99999))
+
+class Student(models.Model):
+    student_uniqid = models.CharField(max_length=45, default = random_string)
+    username = models.CharField(max_length=45)
+    password = models.CharField(max_length=45)
+    firstname = models.CharField(max_length=45)
+    lastname = models.CharField(max_length=45)
+    roll = models.CharField(max_length=10)
+    mobile = models.CharField(max_length=45,null=True)
+    email = models.EmailField(max_length=45,null=True)
+
+
+

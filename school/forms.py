@@ -10,16 +10,10 @@ class AdminSigupForm(forms.ModelForm):
 
 
 #for student related form
-class StudentUserForm(forms.ModelForm):
+class StudentForm(forms.ModelForm):
     class Meta:
-        model=User
-        fields=['first_name','last_name','username','password']
-class StudentExtraForm(forms.ModelForm):
-    class Meta:
-        model=models.StudentExtra
-        fields=['roll','cl','mobile','fee','status']
-
-
+        model=models.Student
+        fields=['firstname','lastname','email', 'mobile']
 
 #for teacher related form
 class TeacherUserForm(forms.ModelForm):
