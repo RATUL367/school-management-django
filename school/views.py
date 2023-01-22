@@ -58,22 +58,17 @@ def admin_signup_view(request):
 
 
 def student_signup_view(request):
-    form1=forms.StudentUserForm()
-    form2=forms.StudentExtraForm()
-    mydict={'form1':form1,'form2':form2}
+    form1=forms.StudentForm()
+    mydict={'form1':form1}
     if request.method=='POST':
-        form1=forms.StudentUserForm(request.POST)
-        form2=forms.StudentExtraForm(request.POST)
-        if form1.is_valid() and form2.is_valid():
-            user=form1.save()
-            user.set_password(user.password)
-            user.save()
-            f2=form2.save(commit=False)
-            f2.user=user
-            user2=f2.save()
+        form1=forms.StudentForm(request.POST)
+        if form1.is_valid():
+            student=form1.save()
+            student.save()
 
-            my_student_group = Group.objects.get_or_create(name='STUDENT')
-            my_student_group[0].user_set.add(user)
+
+            # my_student_group = Group.objects.get_or_create(name='STUDENT')
+            # my_student_group[0].user_set.add(user)
 
         return HttpResponseRedirect('studentlogin')
     return render(request,'school/studentsignup.html',context=mydict)
